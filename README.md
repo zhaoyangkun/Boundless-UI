@@ -60,8 +60,8 @@
 
 ### templates 中包含以下 html 文件
 
-1. index.html: 主页
-2. article：文章详情页
+1. index.html：主页
+2. article.html：文章详情页
 3. archive.html：归档页
 4. category.html：分类页
 5. tag.html：标签墙页
