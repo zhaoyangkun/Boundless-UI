@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="shortcut icon" href="../img/user.jpeg">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="main">
+        <div class="form">
+            <a class="not-on" id="landing" href="javascript:void(0);">登录</a>
+            <a class="on" id="registered" href="javascript:void(0);">注册</a>
+            <div class="fix"></div>
+
+            <form type="POST" action="/admin/register" id="registered-content" data-form='ajax'>
+                <input type="hidden" name="csrfmiddlewaretoken"
+                    value="vbhIXrMdrhdhmYRHh4c6bgJDvs6Jf2qQ79qDp9gyUvC3AcfIcTk5ITNWZpHkIHel">
+                <div class="inp">
+                    <label><input class="inp-input" data-required="请输入用户名" data-rule="^[a-zA-Z0-9_-]{4,16}$"
+                            data-rule-message="请输入4至16位普通字符" data-block="true" id="user_name_r" name="user_name"
+                            type="text" placeholder="请输入用户名" /></label>
+                </div>
+                <div class="inp">
+                    <label><input class="inp-input" data-required="请输入密码" data-rule="^[\w_-]{6,16}$"
+                            data-rule-message="请输入6至16位普通字符" data-block="true" id="pwd_r" name="pwd" type="password"
+                            placeholder="请输入密码" /></label>
+                </div>
+                <div class="inp">
+                    <label><input class="inp-input" data-required="请输入确认密码" data-equal="#pwd_r" id="pwd_confirm_r"
+                            name="pwd" type="password" data-block="true" placeholder="请再次输入密码" /></label>
+                </div>
+                <div class="inp">
+                    <label><input class="inp-input" data-required="请输入邮箱" data-email="true" id="email_r" name="email"
+                            type="text" data-block="true" placeholder="电子邮箱" /></label>
+                </div>
+                <input onclick="send_email()" id="send-code" type="button" class="login" value="发送验证码">
+                <div class="inp">
+                    <label><input class="inp-input" data-required="请输入验证码" id="email_code" name="email_code" type="text"
+                            data-block="true" placeholder="邮箱验证码" /></label>
+                </div>
+                <button id="register" type="submit" class="login">立即注册</button>
+                <div id="bottom">
+                    <a href="index.html " id="registeredtxt">回到首页</a>
+                    <a href="forget-pwd.html" onclick="" id="forgotpassword">忘记密码</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--尾部-->
+    <footer class="footer lowin-footer">
+        <div class="footer-line">
+            <div class="icon-center">
+                <span class="icon-box"><a id="github-icon" target="_blank" href="https://github.com/zhaoyangkun"
+                        class="foot-icon"></a>
+                </span>
+                <span class="icon-box"><a id="qq-icon" target="_blank"
+                        href="tencent://Message/?Uin=2295098032&amp;websiteName=q-zone.qq.com&amp;Menu=yes"
+                        class="foot-icon"></a>
+                </span>
+            </div>
+        </div>
+        <div class="footer-line">Powerde By <a href="https://github.com/zhaoyangkun/Boundless-UI"
+                target="_blank">BoundlessUI</a> • © 2019</div>
+        <div class="footer-line">浙ICP备88888888号 <a href="" target="_blank">站点地图</a>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../js/verJs.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript">
+        const verJs_reg = new VerJs({
+            form: "#registered-content",
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.code === 1) {
+                    swal({
+                        text: data.msg,
+                        icon: "success",
+                        timer: 1500
+                    }).then((value) => {
+                        toLogin();
+                    });
+                } else if (data.code === 0) {
+                    swal({
+                        text: data.msg,
+                        icon: "error",
+                        timer: 1500
+                    });
+                }
+            },
+            fail: function (data) {
+                console.log(data);
+            }
+        });
+    </script>
+</body>
+
+</html>

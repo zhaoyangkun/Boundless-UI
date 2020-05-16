@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="shortcut icon" href="../img/user.jpeg">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="main">
+        <div class="form">
+            <a class="on" id="landing" href="javascript:void(0);">登录</a>
+            <a class="not-on" id="registered" href="javascript:void(0);">注册</a>
+            <div class="fix"></div>
+
+            <form type="POST" action="" id="landing-content" data-form="ajax">
+                <input type="hidden" name="csrfmiddlewaretoken"
+                    value="ATVqa3VWx0vdl5KGcfhDx3l3EjAmcluacR4lCLph0eUZzj8H74pC4Gpm8gbXF0iF">
+                <div class="auth-inp">
+                    <div id="icon-box"><a onclick="github_login()" class="git-icon" href="javascript:void(0);"></a>
+                    </div>
+                    <div class="tips">
+                        <p class="fl">Github授权登录</p>
+                    </div>
+                </div>
+                <!--错误信息提示-->
+                <span class="error ta-c">
+                </span>
+                <!--错误信息提示-->
+                <div class="inp" style="margin-top: 0">
+                    <label>
+                        <input class="inp-input" data-block="true" type="text" data-required="请输入用户名或者邮箱" id="user_name"
+                            name="user_name" placeholder="用户名或者邮箱" />
+                    </label>
+                </div>
+                <div class="inp"><label><input class="inp-input" data-block="true" type="password" data-required="请输入密码"
+                            id="pwd" name="pwd" placeholder="密码" /></label>
+                </div>
+                <div class="inp"><label><input class="inp-input" data-block="true" type="text" id="code" name="code"
+                            data-required="请输入验证码" placeholder="输入验证码" /></label></div>
+                <div class="code-box" style="cursor: pointer;"><img id="code_img" src="../img/verify-code.png" alt="" />
+                </div>
+                <button id="login" type="submit" class="login">登录</button>
+                <div id="bottom">
+                    <a href="index.html" id="registeredtxt">回到首页</a>
+                    <a href="forget-pwd.html" id="forgotpassword" onclick="">忘记密码</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--尾部-->
+    <footer class="footer lowin-footer">
+        <div class="footer-line">
+            <div class="icon-center">
+                <span class="icon-box"><a id="github-icon" target="_blank" href="https://github.com/zhaoyangkun"
+                        class="foot-icon"></a>
+                </span>
+                <span class="icon-box"><a id="qq-icon" target="_blank"
+                        href="tencent://Message/?Uin=2295098032&amp;websiteName=q-zone.qq.com&amp;Menu=yes"
+                        class="foot-icon"></a>
+                </span>
+            </div>
+        </div>
+        <div class="footer-line">Powerde By <a href="https://github.com/zhaoyangkun/Boundless-UI"
+                target="_blank">BoundlessUI</a> • © 2019</div>
+        <div class="footer-line">浙ICP备88888888号 <a href="" target="_blank">站点地图</a>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../js/verJs.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript">
+        $("#code_img").click(function () {
+
+        });
+
+        const verJs_login = new VerJs({
+            form: "#landing-content",
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+            },
+            fail: function (data) {
+                console.log(data);
+            }
+        });
+
+        $(".git-icon").mouseenter(function (e) {
+            $(".tips").stop(true).slideToggle(300);
+        });
+
+        $(".git-icon").mouseleave(function (e) {
+            $(".tips").stop(true).slideToggle(300);
+        });
+
+        function github_login() {
+            $.ajax({
+                type: 'GET',
+                url: '',
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
